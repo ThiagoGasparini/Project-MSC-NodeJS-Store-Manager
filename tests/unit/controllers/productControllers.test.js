@@ -62,4 +62,19 @@ describe('testando camada Controller', () => {
       expect(res.json.calledWith({ message: 'Product not found'})).to.be.true;
     })
   })
+
+  describe("testando função create", () => {
+    it("criando o produto", async () => {
+      const productObj = { name: "ProdutoX" };
+      sinon.stub(productService, "create").resolves(productObj);
+      const req = {};
+      const res = {};
+      req.body = { name: "ProdutoX" };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns(res);
+      await productController.create(req, res);
+      expect(res.status.calledWith(201)).to.be.true;
+      expect(res.json.calledWith(productObj)).to.be.true;
+    });
+  });
 });

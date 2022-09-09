@@ -55,4 +55,16 @@ describe('Testando camada Model', () => {
       });
     });
   });
+
+  describe('testando a função create', () => {
+    describe('produto criado com sucesso', () => {
+      it('retorna o id do novo produto', async () => {
+        const execute = [{ insertId: 4 }];
+        sinon.stub(productModel, "create").resolves(execute);
+        const product = await productService.create("ProdutoX");
+        expect(product).to.be.an('object');
+        expect(product).to.be.all.keys('id', 'name');
+      })
+    })
+  })
 });
