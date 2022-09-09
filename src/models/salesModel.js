@@ -2,16 +2,16 @@ const conn = require('./connection');
 
 const salesModel = {
   createSale: async () => {
-    const execute = 'INSERT INTO StoreManager.sales (date) VALUES (now())';
-    const [{ insertId }] = await conn.query(execute);
+    const query = 'INSERT INTO StoreManager.sales (date) VALUES (now())';
+    const [{ insertId }] = await conn.execute(query);
     return { id: insertId };
   },
 
   createSaleProduct: async (saleInfo) => {
-    const execute = `INSERT INTO StoreManager.sales_products (sale_id,product_id,quantity)
+    const query = `INSERT INTO StoreManager.sales_products (sale_id,product_id,quantity)
     VALUES (?,?,?)`;
     const { saleId, productId, quantity } = saleInfo;
-    await conn.query(execute, [saleId, productId, quantity]);
+    await conn.execute(query, [saleId, productId, quantity]);
 
     return { productId, quantity };
   },
