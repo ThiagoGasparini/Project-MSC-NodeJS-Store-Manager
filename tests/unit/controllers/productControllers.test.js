@@ -26,7 +26,6 @@ const mockProducts = [
 describe('testando camada Controller', () => {
   afterEach(sinon.restore);
 
-  describe('testando função getAll', () => {
     it('retorna a lista', async () => {
       const res = {};
       const req = {};
@@ -39,8 +38,7 @@ describe('testando camada Controller', () => {
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith(mockProducts);
     })
-  })
-  describe('testa getById', () => {
+  
     it("buscando pelo id", async () => {
       const res = {};
       const req = {
@@ -82,7 +80,7 @@ describe('testando camada Controller', () => {
       expect(res.status).to.have.been.calledWith(404);
       expect(res.json).to.have.been.calledWith({ message: "Product not found" });
     })
-  })
+
 
   describe("testando função create", () => {
     it("criando o produto", async () => {

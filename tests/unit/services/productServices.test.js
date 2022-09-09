@@ -41,12 +41,12 @@ describe('Testando camada Model', () => {
       it("retorna um objeto com chave id e name", async () => {
         sinon.stub(productModel, "getById").resolves(mockProducts[0]);
         const product = await productService.getById(1);
-        expect(result).to.be.deep.equal({
+        expect(product).to.be.deep.equal({
           type: null,
           message: mockProducts[0],
         });
       });
-      
+
       it("Testa se ao digitar um id que não existe é retornado um objeto com erro", async function () {
       sinon.stub(productModel, "getById").resolves(undefined);
 

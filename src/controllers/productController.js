@@ -18,6 +18,14 @@ const productController = {
     const product = await productService.create(name);
     return res.status(201).json(product);
   },
+
+   update: async (req, res) => {
+    const { id } = req.params;
+    const { name } = req.body;
+    const updateProduct = await productService.update(id, name);
+    if (!updateProduct) return res.status(404).json({ message: 'Product not found' });
+    return res.status(200).json(updateProduct);
+  },
 };
 
 module.exports = productController;
