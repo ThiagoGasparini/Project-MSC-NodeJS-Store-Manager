@@ -1,5 +1,6 @@
 const sinon = require("sinon");
 const { expect } = require("chai");
+
 const productController = require('../../../src/controllers/productController');
 const productService = require("../../../src/services/productService");
 
@@ -22,21 +23,21 @@ describe('testando camada Controller', () => {
   beforeEach(sinon.restore);
   describe('testando função getAll', () => {
     it('case OK', async () => {
-      sinon.stub(productService, 'getAll').resolves(mockAllProducts);
+      sinon.stub(productService, "getAll").resolves(mockProducts);
       const req = {};
       const res = {};
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns(res);
       await productController.getAll(req, res);
       expect(res.status.calledWith(200)).to.be.true;
-      expect(res.json.calledWith(mockAllProducts)).to.be.true;
+      expect(res.json.calledWith(mockProducts)).to.be.true;
     })
   })
   describe('testa getById', () => {
     it("case OK", async () => {
       const productObj = {
-        id: mockAllProducts[0].id,
-        name: mockAllProducts[0].name,
+        id: mockProducts[0].id,
+        name: mockProducts[0].name,
       };
       sinon.stub(productService, "getById").resolves(productObj);
       const req = {};
@@ -48,6 +49,7 @@ describe('testando camada Controller', () => {
       expect(res.status.calledWith(200)).to.be.true;
       expect(res.json.calledWith(productObj)).to.be.true;
     });
+
     it('case N OK', async () => {
       sinon.stub(productService, 'getById').resolves(null);
       const req = {};

@@ -11,6 +11,12 @@ const productService = {
     if (!product) return null;
     return product;
   },
+
+  create: async (name) => {
+    const id = await productModel.create(name);
+    const product = { id, name };
+    return product;
+  },
 };
 
 module.exports = productService;
