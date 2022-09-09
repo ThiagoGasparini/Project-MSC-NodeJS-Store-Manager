@@ -1,8 +1,13 @@
 const productSchema = require('./productSchema');
 
+const validateProduct = (product) => {
+    const isValid = productSchema.validate(product);
+    return isValid;
+  };
+
 const productValidator = (req, res, next) => {
   const product = { ...req.body };
-  const { error } = productSchema.validate(product);
+  const { error } = validateProduct(product);
 
   if (error) {
     const [code, message] = error.message.split('|');
