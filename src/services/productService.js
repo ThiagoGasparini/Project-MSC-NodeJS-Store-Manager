@@ -29,6 +29,13 @@ const productService = {
     const result = await productModel.update(id, name);
     return result;
   },
+
+  delete: async (id) => {
+    const checkId = await productModel.getById(id);
+    if (!checkId) return null;
+    const result = await productModel.delete(id);
+    return result;
+  },
 };
 
 module.exports = productService;

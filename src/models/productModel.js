@@ -32,6 +32,11 @@ const productModel = {
     [name, id]);
     return { id, name };
   },
+
+  delete: async (id) => {
+    await conn.execute('DELETE FROM StoreManager.products WHERE id  = ?', [id]);
+    return { id };
+  },
 };
 
 module.exports = productModel;
