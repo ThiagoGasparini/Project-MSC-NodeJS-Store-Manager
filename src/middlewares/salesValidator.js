@@ -1,9 +1,14 @@
 const productService = require('../services/productService');
 const salesSchema = require('./salesSchema');
 
+const validateSale = (sale) => {
+  const isValid = salesSchema.validate(sale);
+  return isValid;
+};
+
 const salesMiddleware = (req, res, next) => {
   const product = [...req.body];
-  const { error } = salesSchema.validate(product);
+  const { error } = validateSale(product);
   if (error) {
     const [code, message] = error.message.split('|');
     console.log(error);
