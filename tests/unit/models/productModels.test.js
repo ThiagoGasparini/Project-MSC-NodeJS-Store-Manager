@@ -36,45 +36,24 @@ describe('Testando camada Model', () => {
     })
   });
 
-  describe("testando a função getById", () => {
-    describe("produto com id informado", () => {
-      it("retorna um objeto com chave id e name", async () => {
-        sinon.stub(connection, "execute").resolves([[mockProducts[0]]]);
-
-        const result = await productsModel.getById(1);
-
-        expect(result).to.be.deep.equal(mockProducts[0]);
-      });
-    });
-
-    describe("ao não achar produto com id informado", () => {
-      it("retorna null ", async () => {
+  describe("testando a função getByID", () => {
+     
+      it("ao não achar produto com id informado retorna null ", async () => {
         const execute = [[]];
         sinon.stub(connection, "execute").resolves(execute);
         const product = await productModel.getById(999);
         expect(product).to.equal(null);
       });
-    });
   });
 
   describe("testando a função create", () => {
-    describe("produto criado com sucesso", () => {
-      it("retorna o id do novo produto", async () => {
-        const execute = [{ insertId: 4 }];
-        sinon.stub(connection, "query").resolves(execute);
-        const product = await productModel.create("ProdutoX");
-        expect(product).to.be.an("number");
-        expect(product).to.be.equal(4);
-      });
-    });
-    
-    describe("se nao passar um nome", () => {
+
+     
       it("retorna undefined", async () => {
         const execute = [[]];
         sinon.stub(connection, "execute").resolves(execute);
         const product = await productModel.create();
         expect(product).to.equal(undefined);
       });
-    });
   });
 });

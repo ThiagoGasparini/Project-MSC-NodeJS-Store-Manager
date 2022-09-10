@@ -40,45 +40,34 @@ describe('testando camada Controller', () => {
     })
   
     it("buscando pelo id", async () => {
+      const productObj = { id: mockProducts[0].id, name: mockProducts[0].name}
+      sinon.stub(productService, 'getById').resolves(productObj);
+
+      const req = {};
       const res = {};
-      const req = {
-      params: {
-        id: 1,
-      },
-    };
 
+      req.params = { id: 1 };
       res.status = sinon.stub().returns(res);
-      res.json = sinon.stub().returns();
-
-      sinon
-      .stub(productService, "getById")
-      .resolves({ type: null, message: mockProducts[0] });
+      res.json = sinon.stub().returns(res);
 
       await productController.getById(req, res);
-
-      expect(res.status).to.have.been.calledWith(200);
-      expect(res.json).to.have.been.calledWith(mockProducts[0]);
+      expect(res.status.calledWith(200)).to.be.true;
+      expect(res.json.calledWith(productObj)).to.be.true;
     });
 
     it('id inexistente', async () => {
+      sinon.stub(productService, 'getById').resolves(null);
+
+      const req = {};
       const res = {};
-      const req = {
-      params: {
-        id: 99,
-      },
-    };
 
+      req.params = { id: 999 };
       res.status = sinon.stub().returns(res);
-      res.json = sinon.stub().returns();
-
-      sinon
-      .stub(productService, "getById")
-      .resolves({ type: "PRODUCT_NOT_FOUND", message: "Product not found" });
+      res.json = sinon.stub().returns(res);
 
       await productController.getById(req, res);
-
-      expect(res.status).to.have.been.calledWith(404);
-      expect(res.json).to.have.been.calledWith({ message: "Product not found" });
+      expect(res.status.calledWith(404)).to.be.true;
+      expect(res.json.calledWith({ message: 'Product not found'})).to.be.true;
     })
 
 
