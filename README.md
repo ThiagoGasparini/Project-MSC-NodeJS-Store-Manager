@@ -31,16 +31,3 @@ O banco terá três tabelas:
 - O script de criação do banco de dados pode ser visto [aqui](migration.sql);
 - O script que popula o banco de dados pode ser visto [aqui](seed.sql);
 
-**:warning: Atenção:** Não exclua, altere ou mova de lugar os arquivos `migration.sql` e `seed.sql`, eles são usados para realizar os testes. Qualquer dúvida sobre estes arquivos procure a monitoria no Slack ou nas mentorias.
-
-A tabela `products` tem o seguinte formato: _(O id será gerado automaticamente)_
-
-![Tabela Produtos](./public/tableproducts.png)
-
-A tabela `sales` tem o seguinte formato: _(O id e date são gerados automaticamente)_
-
-![Tabela Vendas](./public/tablesales.png)
-
-A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `products` e `sales` e tem o seguinte formato: _(O produto e a venda são deletados automaticamente)_
-
-![Tabela Vendas-Produtos](./public/tablesalesproducts.png)
